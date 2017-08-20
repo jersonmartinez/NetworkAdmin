@@ -54,7 +54,6 @@ function get_service(name_service, action){
 			GetWEBUsuarios();
 		else if (action == "sitios")
 			GetWEBSitios();
-
 	}
 }
 
