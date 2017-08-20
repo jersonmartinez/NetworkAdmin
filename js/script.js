@@ -57,3 +57,29 @@ function get_service(name_service, action){
 
 	}
 }
+
+function GetDHCPMemoria(){
+	$.ajax({
+	    url: "php/GetDHCPMemoria.php",
+	    success: function(data){
+	    	if (data == "OK"){
+	    		$(".aHTMLAddPrivilege").html("<span class='icon fa fa-user'></span> " + value);
+	    	}
+	    }
+  	});
+}
+
+function ChangePrivilegeState(value){
+	$("#InputPrivilege").val(value);
+
+	$.ajax({
+	    url: "private/desktop0/html/build/UpdatePrivilege.php",
+	    type: "POST",
+	    data: $("#ChangePrivilegeForm").serialize(),
+	    success: function(data){
+	    	if (data == "OK"){
+	    		$(".aHTMLAddPrivilege").html("<span class='icon fa fa-user'></span> " + value);
+	    	}
+	    }
+  	});
+}

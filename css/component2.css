@@ -185,6 +185,7 @@ body {
 }
 
 .csstransforms .opened-nav li {
+	cursor: pointer;
 	-webkit-transition: all .3s ease .3s;
 	-moz-transition: all .3s ease .3s;
 	transition: all .3s ease .3s;
