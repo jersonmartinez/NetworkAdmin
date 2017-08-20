@@ -14,23 +14,12 @@
 	</head>
 	<body>
 		<div class="container">
-			<header>
-				<h1>Monitorización de Servidores <span>Recolectar información de red para cada equipo conectado</span></h1>	
-				<nav class="codrops-demos">
-					<a class="current-demo class_dhcp" onclick="javascript: start_service('dhcp')">DHCP</a>
-					<a class="class_dns" onclick="javascript: start_service('dns')">DNS</a>
-					<a class="class_web" onclick="javascript: start_service('web')">WEB</a>
-
-					<form action="./" id="FormService" method="post">
-						<input type="hidden" name="service" id="service" />
-					</form>
-				</nav>
-			</header>
+			
 			<div class="component">
 				<h2>Servidores</h2>
 				
 				<?php
-					if (isset($_POST['service']) && !empty($_POST['service']) ){
+					if (isset($_POST['service']) && !empty($_POST['service'])){
 
 						?>
 							<button class="cn-button" id="cn-button">Menú</button>
@@ -65,6 +54,46 @@
 					}
 				?>
 			</div>
+			<header>
+				<h1>Monitorización de Servidores <span>Recolectar información de red para cada equipo conectado</span></h1>	
+				<nav class="codrops-demos">
+					<?php
+						if (@$service == "dhcp"){
+							?>
+								<a class="current-demo class_dhcp" onclick="javascript: start_service('dhcp')">DHCP</a>
+							<?php
+						} else {
+							?>
+								<a class="class_dhcp" onclick="javascript: start_service('dhcp')">DHCP</a>
+							<?php							
+						}
+
+						if (@$service == "dns"){
+							?>
+								<a class="current-demo class_dns" onclick="javascript: start_service('dns')">DNS</a>
+							<?php
+						} else {
+							?>
+								<a class="class_dns" onclick="javascript: start_service('dns')">DNS</a>
+							<?php							
+						}
+
+						if (@$service == "web"){
+							?>
+								<a class="current-demo class_web" onclick="javascript: start_service('web')">WEB</a>
+							<?php
+						} else {
+							?>
+								<a class="class_web" onclick="javascript: start_service('web')">WEB</a>
+							<?php							
+						}
+					?>
+
+					<form action="./" id="FormService" method="post">
+						<input type="hidden" name="service" id="service" />
+					</form>
+				</nav>
+			</header>
 		</div>
 		<script src="js/polyfills.js"></script>
 		<script src="js/demo2.js"></script>
