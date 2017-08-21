@@ -1,57 +1,124 @@
-Memoria total: 234
-Memoria usada: 139
-Memoria libre: 10
-Memoria compartida: 4
-Búfer/caché : 84
-Memoria disponible: 82
-Tamaño del disco: 11G
-Disco usado: 3.7G
-Disponible: 6.3G
-Porcentaje de uso: 37%
-enp0s3 192.168.100.2
-enp0s8 10.0.3.15
-lo 127.0.0.1
-Número de usuarios conectados: 1
-network
-22tcp
-5355tcp
-22tcp
-22tcp6
-5355tcp6
-53udp
-67udp
-68udp
-39603udp
-6331udp
-5353udp
-5355udp
-
-
-
-
-
-
-
-
-Estado de las conexions de red
-tcp        0      0 0.0.0.0:22              0.0.0.0:*               ESCUCHAR    -                    apagado (0.00/0/0)
-tcp        0      0 0.0.0.0:5355            0.0.0.0:*               ESCUCHAR    -                    apagado (0.00/0/0)
-tcp        0    204 192.168.100.2:22        192.168.100.10:50612    ESTABLECIDO -                    encendido (0.20/0/0)
-tcp6       0      0 :::22                   :::*                    ESCUCHAR    -                    apagado (0.00/0/0)
-tcp6       0      0 :::5355                 :::*                    ESCUCHAR    -                    apagado (0.00/0/0)
-udp        0      0 127.0.0.53:53           0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:67              0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:68              0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:39603           0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:6331            0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp        0      0 0.0.0.0:5355            0.0.0.0:*                           -                    apagado (0.00/0/0)
-udp6       0      0 :::43678                :::*                                -                    apagado (0.00/0/0)
-udp6       0      0 :::5353                 :::*                                -                    apagado (0.00/0/0)
-udp6       0      0 :::5355                 :::*                                -                    apagado (0.00/0/0)
-udp6       0      0 :::44280                :::*                                -                    apagado (0.00/0/0)
-ago 21 03:02:16     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
-ago 21 03:07:07     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
-ago 21 03:11:01     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
-ago 21 03:15:50     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
-ago 21 03:20:09     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
+234,103,7,2,122,119,
+11G,3.8G,6.3G,38%,
+=
+enp0s3,192.168.100.2,
+enp0s8,10.0.3.15,
+lo,127.0.0.1,
+=
+22 tcp 5355 tcp 22 tcp 22 tcp6 5355 tcp6,
+53 udp 67 udp 68 udp 39603 udp 6331 udp 5353 udp 5355 udp 
+=
+tcp
+tcp
+tcp
+tcp6
+tcp6
+udp
+udp
+udp
+udp
+udp
+udp
+udp
+udp6
+udp6
+udp6
+udp6 | 
+0.0.0.0:22
+0.0.0.0:5355
+192.168.100.2:22
+:::22
+:::5355
+127.0.0.53:53
+0.0.0.0:67
+0.0.0.0:68
+0.0.0.0:39603
+0.0.0.0:6331
+0.0.0.0:5353
+0.0.0.0:5355
+:::43678
+:::5353
+:::5355
+:::44280 | 
+0.0.0.0:*
+0.0.0.0:*
+192.168.100.10:52546
+:::*
+:::*
+0.0.0.0:*
+0.0.0.0:*
+0.0.0.0:*
+0.0.0.0:*
+0.0.0.0:*
+0.0.0.0:*
+0.0.0.0:*
+:::*
+:::*
+:::*
+:::* | 
+ESCUCHAR
+ESCUCHAR
+ESTABLECIDO
+ESCUCHAR
+ESCUCHAR
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+- | 
+-
+-
+-
+-
+-
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado
+apagado | 
+=
+network ,
+=
+ago
+ago
+ago
+ago
+ago | 
+21
+21
+21
+21
+21 | 
+07:28:56
+07:33:15
+07:38:03
+07:41:59
+07:45:54 | 
+192.168.100.10
+192.168.100.10
+192.168.100.10
+192.168.100.10
+192.168.100.10 | 
+08:00:27:42:7f:d9
+08:00:27:42:7f:d9
+08:00:27:42:7f:d9
+08:00:27:42:7f:d9
+08:00:27:42:7f:d9 | 
+enp0s3
+enp0s3
+enp0s3
+enp0s3
+enp0s3 | 
+=

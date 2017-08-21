@@ -1,8 +1,21 @@
+<?php
+	function Fatality($ArrayEstado){
+		$contadorSecond = 0;
+		for ($i=0; $i < count($ArrayEstado); $i++) { 
+			$Second = explode(PHP_EOL, $ArrayEstado[$i]);
+
+			$contadorSecond = count($Second);
+			return $contadorSecond;
+		}
+	}
+?>
+
 <div class="md-modal md-effect-1" id="modal-1">
 	<div class="md-content">
 		<h3>Memoria</h3>
 		<?php 
-			$ArrayContent = explode("\0", $Content); 
+			$ArrayContent = explode(",", $Content); 
+			$ArrayInterfaces = explode("=", $Content); 
 			// echo $ArrayContent[0];
 		?>
 
@@ -16,9 +29,9 @@
 				</tr>
 
 				<tr>
-					<td>454</td>
-					<td>2992</td>
-					<td>9082</td>
+					<td><?php echo $ArrayContent[0]."MB"; ?></td>
+					<td><?php echo $ArrayContent[1]."MB"; ?></td>
+					<td><?php echo $ArrayContent[2]."MB"; ?></td>
 				</tr>
 			</table>
 			<br/>
@@ -30,16 +43,11 @@
 				</tr>
 
 				<tr>
-					<td>454</td>
-					<td>2992</td>
-					<td>9082</td>
+					<td><?php echo $ArrayContent[3]."MB"; ?></td>
+					<td><?php echo $ArrayContent[4]."MB"; ?></td>
+					<td><?php echo $ArrayContent[5]."MB"; ?></td>
 				</tr>
 			</table>
-			<!-- <ul>
-				<li><strong>Memoria total:</strong> </li>
-				<li><strong>Memoria usada:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul> -->
 			<button class="md-close">Cerrar</button>
 		</div>
 	</div>
@@ -47,71 +55,201 @@
 
 <div class="md-modal md-effect-2" id="modal-2">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Interfaces de Red | IP</h3>
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<?php
+				$ArrayIntIP = explode(",", $ArrayInterfaces[1]);
+			?>
+			<p>Interfaces de red y direcciones IP colocadas en ella</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 30%;"><b>Nombre de la interfaz</b></td>
+					<td style="width: 25%;"><b>Dirección IP</b></td>
+				</tr>
+
+				
+				<?php
+					$i = 0;
+					foreach ($ArrayIntIP as $value) {
+
+						?>
+							<tr>
+								<td><?php echo $ArrayIntIP[$i++]; ?></td>
+								<td><?php echo $ArrayIntIP[$i++]; ?></td>
+							</tr>
+						<?php
+					}
+				?>
+
+			</table>
+			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
 </div>
-<div class="md-modal md-effect-3" id="modal-3">
+<div class="md-modal md-effect-3" id="modal-3" style="top: 50%;">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Puertos</h3>
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<?php
+				$ArrayPuerto = explode(",", $ArrayInterfaces[2]);
+			?>
+			<p>Puertos que se encuentran abiertos</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 50%;"><b>Número de puerto</b></td>
+					<td style="width: 50%;"><b>Protocolo</b></td>
+				</tr>
+
+				<?php
+					for ($i=0; $i < count($ArrayPuerto); $i++) { 
+						$Firts = explode(" ", $ArrayPuerto[$i]);
+
+						for ($j=0; $j < count($Firts); $j++) { 
+							?>
+								<tr>
+									<td><?php echo $Firts[$j]; ?></td>
+									<td><?php echo $Firts[$j+1]; $j++; ?></td>
+								</tr>
+							<?php
+						}
+					}
+				?>
+
+
+			</table>
+			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
 </div>
-<div class="md-modal md-effect-4" id="modal-4">
+<div class="md-modal md-effect-4" id="modal-4" style="top: 50%; width: 80%; max-width: 90%;">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Estado</h3>
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<?php
+				$ArrayEstado = explode("|", $ArrayInterfaces[3]);
+			?>
+			<p>Estados de las conexiones de red</p>
+			<table style="width: 100%;">
+				<tr style="width: 100%;">
+					<td><b>Protocolo</b></td>
+					<td><b>Direccion Local</b></td>
+					<td><b>Direccion Remota</b></td>
+					<td><b>Estado</b></td>
+					<td><b>Temporizador</b></td>
+				</tr>
+
+				<?php
+					$contadorSecond = 0;
+					for ($i=0; $i < count($ArrayEstado); $i++) { 
+						$Second = explode(PHP_EOL, $ArrayEstado[$i]);
+
+						$contadorSecond = count($Second);
+						for ($j=0; $j < count($Second); $j++) { 
+							$Cero[$i][$j] = $Second[$j];
+						}
+					}
+
+					for ($i=0; $i < Fatality($ArrayEstado); $i++) { 
+						?>
+							<tr>
+						<?php
+						for ($j=0; $j < count($ArrayEstado); $j++) { 
+							?>
+								<td><?php echo $Cero[$j][$i]; ?></td>
+							<?php
+						}
+						?>
+							</tr>
+						<?php
+					}
+
+				?>
+
+			</table>
+			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
 </div>
 <div class="md-modal md-effect-5" id="modal-5">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Usuarios</h3>
+		<?php 
+			$ArrayUsuario = explode(",", $ArrayInterfaces[4]);
+		?>
+
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<p>Usuarios del sistema indicando cuales están logueados actualmente</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 50%;"><b>Cantidad de usuarios</b></td>
+					<td style="width: 50%;"><b>Nombre de usuario</b></td>
+				</tr>
+
+				<?php
+					for ($i=0; $i < count($ArrayUsuario) - 1; $i++) { 
+						?>
+							<tr>
+								<td><?php echo $i+1; ?></td>
+								<td><?php echo $ArrayUsuario[$i]; ?></td>
+							</tr>
+						<?php
+					}
+				?>
+			</table>
+			<br>
+			
+			<button class="md-close">Cerrar</button>
 		</div>
 	</div>
 </div>
 <div class="md-modal md-effect-6" id="modal-6">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Monitor DHCP</h3>
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<?php
+				// echo $ArrayInterfaces[6];
+				$ArrayDHCP = explode("|", $ArrayInterfaces[5]);
+			?>
+			<p>Interfaz en la que está asignando IP's y las asignaciones realizadas.</p>
+			<table style="width: 100%;">
+				<tr style="width: 100%;">
+					<td><b>Mes</b></td>
+					<td><b>Dia</b></td>
+					<td><b>Hora</b></td>
+					<td><b>IP Asignada</b></td>
+					<td><b>Host Cliente</b></td>
+					<td><b>Interfaz</b></td>
+				</tr>
+
+				<?php
+					$contadorSecond = 0;
+					for ($i=0; $i < count($ArrayDHCP); $i++) { 
+						$Second = explode(PHP_EOL, $ArrayDHCP[$i]);
+
+						$contadorSecond = count($Second);
+						for ($j=0; $j < count($Second); $j++) { 
+							$Cero[$i][$j] = $Second[$j];
+						}
+					}
+
+					for ($i=0; $i < Fatality($ArrayDHCP); $i++) { 
+						?>
+							<tr>
+						<?php
+						for ($j=0; $j < count($ArrayDHCP); $j++) { 
+							?>
+								<td><?php echo $Cero[$j][$i]; ?></td>
+							<?php
+						}
+						?>
+							</tr>
+						<?php
+					}
+
+				?>
+
+			</table>
+			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
 </div>
@@ -146,15 +284,25 @@
 
 <div class="md-modal md-effect-19" id="modal-19">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Discos Duros</h3>
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<p>Uso de Discos Duros</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 30%;"><b>Tamaño del disco</b></td>
+					<td style="width: 25%;"><b>Disco usado</b></td>
+					<td style="width: 20%;"><b>Disponible</b></td>
+					<td style="width: 25%;"><b>% en uso</b></td>
+				</tr>
+
+				<tr>
+					<td><?php echo $ArrayContent[6]; ?></td>
+					<td><?php echo $ArrayContent[7]; ?></td>
+					<td><?php echo $ArrayContent[8]; ?></td>
+					<td><?php echo $ArrayContent[9]; ?></td>
+				</tr>
+			</table>
+			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
 </div>
