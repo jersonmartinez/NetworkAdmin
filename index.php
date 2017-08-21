@@ -104,9 +104,10 @@
 				</nav>
 			</header>
 			
-			<?php
-				include ("php/modal.php");
-			?>
+			<div class="windows_modals">
+				
+			</div>
+
 
 		</div>
 

@@ -27,7 +27,7 @@ function GetDHCP(){
 	    url: "php/GetDHCP.php",
 	    success: function(data){
 	    	if (data == "OK"){
-
+	    		
 	    	}
 	    }
   	});
