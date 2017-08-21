@@ -16,7 +16,6 @@
 		<script src="js/script.js"></script>
 
 
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
 		<script src="js/modernizr.custom.js"></script>
 		
@@ -31,29 +30,35 @@
 				<?php
 					if (isset($_POST['service']) && !empty($_POST['service'])){
 						$service = $_POST['service'];
+
+						$Content = file_get_contents("bash/dhcp.txt");
+
 						?>
 							<button class="cn-button" id="cn-button">Menú</button>
 							<div class="cn-wrapper" id="cn-wrapper">
 								<ul>
-									<li class="md-trigger" data-modal="modal-1" onclick="javascript: get_service('<?php echo $service; ?>', 'memoria');"><a><span>Memoria</span></a></li>
-									<li class="md-trigger md-setperspective" data-modal="modal-19" onclick="javascript: get_service('<?php echo $service; ?>', 'discos');"><a><span>Discos</span></a></li>
-									<li class="md-trigger" data-modal="modal-2" onclick="javascript: get_service('<?php echo $service; ?>', 'interfaces');"><a><span>Interfaces</span></a></li>
-									<li class="md-trigger" data-modal="modal-3" onclick="javascript: get_service('<?php echo $service; ?>', 'puertos');"><a><span>Puertos</span></a></li>
-									<li class="md-trigger" data-modal="modal-4" onclick="javascript: get_service('<?php echo $service; ?>', 'estado');"><a><span>Estado</span></a></li>
-									<li class="md-trigger" data-modal="modal-5" onclick="javascript: get_service('<?php echo $service; ?>', 'usuarios');"><a><span>Usuarios</span></a></li>
+									<li class="md-trigger" data-modal="modal-1"><a><span>Memoria</span></a></li>
+									<li class="md-trigger md-setperspective" data-modal="modal-19"><a><span>Discos</span></a></li>
+									<li class="md-trigger" data-modal="modal-2"><a><span>Interfaces</span></a></li>
+									<li class="md-trigger" data-modal="modal-3"><a><span>Puertos</span></a></li>
+									<li class="md-trigger" data-modal="modal-4"><a><span>Estado</span></a></li>
+									<li class="md-trigger" data-modal="modal-5"><a><span>Usuarios</span></a></li>
 										
 									<?php
-										if ($service == "dhcp"){
+										if (@$service == "dhcp"){
 											?>
-												<li class="md-trigger" data-modal="modal-6" onclick="javascript: get_service('<?php echo $service; ?>', 'asignacion');"><a><span>Asignación</span></a></li>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dhcp" /> -->
+												<li class="md-trigger" data-modal="modal-6"><a><span>Asignación</span></a></li>
 											<?php
-										} else if ($service == "dns"){
+										} else if (@$service == "dns"){
 											?>
-												<li class="md-trigger" data-modal="modal-7" onclick="javascript: get_service('<?php echo $service; ?>', 'zonas');"><a><span>Zonas</span></a></li>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dns" /> -->
+												<li class="md-trigger" data-modal="modal-7"><a><span>Zonas</span></a></li>
 											<?php
-										} else if ($service == "web"){
+										} else if (@$service == "web"){
 											?>
-												<li class="md-trigger" data-modal="modal-8"onclick="javascript: get_service('<?php echo $service; ?>', 'sitios');"><a><span>Sitios</span></a></li>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="web" /> -->
+												<li class="md-trigger" data-modal="modal-8"><a><span>Sitios</span></a></li>
 											<?php
 										}
 									?>	
@@ -94,7 +99,7 @@
 						} else {
 							?>
 								<a class="class_web" onclick="javascript: start_service('web')">WEB</a>
-							<?php							
+							<?php
 						}
 					?>
 
@@ -105,7 +110,7 @@
 			</header>
 			
 			<div class="windows_modals">
-				
+				<?php include ("php/modal.php"); ?>
 			</div>
 
 

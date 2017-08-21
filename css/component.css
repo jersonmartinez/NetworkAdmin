@@ -25,7 +25,7 @@ perspective effects (not including the modals and the overlay).
 
 .md-modal {
 	position: fixed;
-	top: 50%;
+	top: 37%;
 	left: 50%;
 	width: 50%;
 	max-width: 630px;
