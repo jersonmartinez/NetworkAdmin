@@ -6,78 +6,28 @@ function start_service(name_service){
 function get_service(name_service, action){
 	if (name_service == "dhcp"){
 
-		if (action == "memoria")
-			GetDHCPMemoria();
-		else if (action == "discos")
-			GetDHCPDiscos();
-		else if (action == "interfaces")
-			GetDHCPInterfaces();
-		else if (action == "puertos")
-			GetDHCPDPuertos();
-		else if (action == "estado")
-			GetDHCPEstado();
-		else if (action == "usuarios")
-			GetDHCPUsuarios();
-		else if (action == "asignacion")
-			GetDHCPAsignacion();
+		GetDHCP();
 
-	} else if (name_service == "dns"){
+	}// } else if (name_service == "dns"){
 
-		if (action == "memoria")
-			GetDNSMemoria();
-		else if (action == "discos")
-			GetDNSDiscos();
-		else if (action == "interfaces")
-			GetDNSInterfaces();
-		else if (action == "puertos")
-			GetDNSDPuertos();
-		else if (action == "estado")
-			GetDNSEstado();
-		else if (action == "usuarios")
-			GetDNSUsuarios();
-		else if (action == "zonas")
-			GetDNSZonas();
+		
 
-	} else if (name_service == "web"){
+	// } else if (name_service == "web"){
 
-		if (action == "memoria")
-			GetWEBMemoria();
-		else if (action == "discos")
-			GetWEBDiscos();
-		else if (action == "interfaces")
-			GetWEBInterfaces();
-		else if (action == "puertos")
-			GetWEBDPuertos();
-		else if (action == "estado")
-			GetWEBEstado();
-		else if (action == "usuarios")
-			GetWEBUsuarios();
-		else if (action == "sitios")
-			GetWEBSitios();
-	}
+		
+	// }
 }
 
-function GetDHCPMemoria(){
-	$.ajax({
-	    url: "php/GetDHCPMemoria.php",
-	    success: function(data){
-	    	if (data == "OK"){
-	    		$(".aHTMLAddPrivilege").html("<span class='icon fa fa-user'></span> " + value);
-	    	}
-	    }
-  	});
+function MyModal(){
+	$('#MyModal').modal('toggle');
 }
 
-function ChangePrivilegeState(value){
-	$("#InputPrivilege").val(value);
-
+function GetDHCP(){
 	$.ajax({
-	    url: "private/desktop0/html/build/UpdatePrivilege.php",
-	    type: "POST",
-	    data: $("#ChangePrivilegeForm").serialize(),
+	    url: "php/GetDHCP.php",
 	    success: function(data){
 	    	if (data == "OK"){
-	    		$(".aHTMLAddPrivilege").html("<span class='icon fa fa-user'></span> " + value);
+
 	    	}
 	    }
   	});
