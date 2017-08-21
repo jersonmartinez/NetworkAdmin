@@ -253,31 +253,89 @@
 		</div>
 	</div>
 </div>
-<div class="md-modal md-effect-7" id="modal-7">
+<div class="md-modal md-effect-7" id="modal-7" style="top: 10%; width: 70%; max-width: 70%;">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Configuración de Zonas</h3>
+		<?php
+			// echo $ArrayInterfaces[5];
+			$Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
+		?>
+
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<p>Archivos de zonas configuradas y las traducciones que estos contienen.</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 25%;"><b>Fichero de zona</b></td>
+					<td style="width: 25%;"><b>Dominio</b></td>
+					<td style="width: 25%;"><b>Traducción</b></td>
+					<td style="width: 25%;"><b>Dirección IP</b></td>
+				</tr>
+
+				<?php
+					for ($i=0; $i < count($Valores); $i++) { 
+	
+						$new_value = explode(",", $Valores[$i]);					
+						?>
+							<tr>
+						<?php
+						for ($j=0; $j < count($new_value) ; $j++) { 
+							?>
+								<td><?php echo $new_value[$j]; ?></td>
+							<?php
+						}
+						?>
+							</tr>
+						<?php
+					}
+				?>
+
+			</table>
+			<br>
+			
+			<button class="md-close">Cerrar</button>
 		</div>
 	</div>
 </div>
 <div class="md-modal md-effect-8" id="modal-8">
 	<div class="md-content">
-		<h3>Modal Dialog</h3>
+		<h3>Sitios Virtuales</h3>
+		<?php
+			// echo $ArrayInterfaces[5];
+			$Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
+		?>
+
 		<div>
-			<p>This is a modal window. You can do the following things with it:</p>
-			<ul>
-				<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-				<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-				<li><strong>Close:</strong> click on the button below to close the modal.</li>
-			</ul>
-			<button class="md-close">Close me!</button>
+			<p>Hosts virtuales configurados en el servidor Web.</p>
+			<table style="width: 100%;">
+				<tr>
+					<td style="width: 25%;"><b>Fichero de zona</b></td>
+					<td style="width: 25%;"><b>Dominio</b></td>
+					<td style="width: 25%;"><b>Traducción</b></td>
+					<td style="width: 25%;"><b>Dirección IP</b></td>
+				</tr>
+
+				<?php
+					for ($i=0; $i < count($Valores); $i++) { 
+	
+						$new_value = explode(",", $Valores[$i]);					
+						?>
+							<tr>
+						<?php
+						for ($j=0; $j < count($new_value) ; $j++) { 
+							?>
+								<td><?php echo $new_value[$j]; ?></td>
+							<?php
+						}
+						?>
+							</tr>
+						<?php
+					}
+				?>
+
+			</table>
+			<br>
+			
+			<button class="md-close">Cerrar</button>
 		</div>
 	</div>
 </div>

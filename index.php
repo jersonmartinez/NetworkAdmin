@@ -31,7 +31,13 @@
 					if (isset($_POST['service']) && !empty($_POST['service'])){
 						$service = $_POST['service'];
 
-						$Content = file_get_contents("bash/dhcp.txt");
+						if ($service == "dhcp"){
+							$Content = file_get_contents("bash/dhcp.txt");
+						} else if ($service == "dns"){
+							$Content = file_get_contents("bash/dns.txt");
+						} else if ($service == "web"){
+							$Content = file_get_contents("bash/web.txt");
+						}
 
 						?>
 							<button class="cn-button" id="cn-button">Menú</button>
@@ -74,31 +80,31 @@
 					<?php
 						if (@$service == "dhcp"){
 							?>
-								<a class="current-demo class_dhcp" onclick="javascript: start_service('dhcp')">DHCP</a>
+								<a class="current-demo class_dhcp" style="cursor: pointer;" onclick="javascript: start_service('dhcp')">DHCP</a>
 							<?php
 						} else {
 							?>
-								<a class="class_dhcp" onclick="javascript: start_service('dhcp')">DHCP</a>
+								<a class="class_dhcp" style="cursor: pointer;" onclick="javascript: start_service('dhcp')">DHCP</a>
 							<?php							
 						}
 
 						if (@$service == "dns"){
 							?>
-								<a class="current-demo class_dns" onclick="javascript: start_service('dns')">DNS</a>
+								<a class="current-demo class_dns" style="cursor: pointer;" onclick="javascript: start_service('dns')">DNS</a>
 							<?php
 						} else {
 							?>
-								<a class="class_dns" onclick="javascript: start_service('dns')">DNS</a>
+								<a class="class_dns" style="cursor: pointer;" onclick="javascript: start_service('dns')">DNS</a>
 							<?php							
 						}
 
 						if (@$service == "web"){
 							?>
-								<a class="current-demo class_web" onclick="javascript: start_service('web')">WEB</a>
+								<a class="current-demo class_web" style="cursor: pointer;" onclick="javascript: start_service('web')">WEB</a>
 							<?php
 						} else {
 							?>
-								<a class="class_web" onclick="javascript: start_service('web')">WEB</a>
+								<a class="class_web" style="cursor: pointer;" onclick="javascript: start_service('web')">WEB</a>
 							<?php
 						}
 					?>
