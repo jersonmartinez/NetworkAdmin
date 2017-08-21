@@ -36,7 +36,7 @@ network
 Estado de las conexions de red
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               ESCUCHAR    -                    apagado (0.00/0/0)
 tcp        0      0 0.0.0.0:5355            0.0.0.0:*               ESCUCHAR    -                    apagado (0.00/0/0)
-tcp        0    204 192.168.100.2:22        192.168.100.10:50606    ESTABLECIDO -                    encendido (0.20/0/0)
+tcp        0    204 192.168.100.2:22        192.168.100.10:50612    ESTABLECIDO -                    encendido (0.20/0/0)
 tcp6       0      0 :::22                   :::*                    ESCUCHAR    -                    apagado (0.00/0/0)
 tcp6       0      0 :::5355                 :::*                    ESCUCHAR    -                    apagado (0.00/0/0)
 udp        0      0 127.0.0.53:53           0.0.0.0:*                           -                    apagado (0.00/0/0)
@@ -50,8 +50,8 @@ udp6       0      0 :::43678                :::*                                
 udp6       0      0 :::5353                 :::*                                -                    apagado (0.00/0/0)
 udp6       0      0 :::5355                 :::*                                -                    apagado (0.00/0/0)
 udp6       0      0 :::44280                :::*                                -                    apagado (0.00/0/0)
-ago 21 02:57:15     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
 ago 21 03:02:16     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
 ago 21 03:07:07     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
 ago 21 03:11:01     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
 ago 21 03:15:50     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
+ago 21 03:20:09     192.168.100.10 to 08:00:27:42:7f:d9 via enp0s3
