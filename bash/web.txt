@@ -1,4 +1,4 @@
-234,112,8,2,112,111,
+234,130,8,3,95,93,
 11G,3.8G,6.2G,39%,
 =
 enp0s3,192.168.100.4,
@@ -40,7 +40,7 @@ udp6 |
 :::5355 | 
 0.0.0.0:*
 0.0.0.0:*
-192.168.100.10:57434
+192.168.100.10:59406
 :::*
 :::*
 :::*
@@ -86,6 +86,8 @@ apagado |
 =
 network ,
 =
-
-
-
+000-default.conf,www.example.com,Habilitado
+default-ssl.conf,No identificado,No habilitado
+zona1.org.conf,www.zona1.org,Habilitado
+zona2.org.conf,www.zona2.org,Habilitado
+=

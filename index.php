@@ -20,7 +20,7 @@
 		<script src="js/modernizr.custom.js"></script>
 		
 	</head>
-	<body>
+	<body id="clicModal">
 		
 		<div class="container">
 			
@@ -40,9 +40,12 @@
 						}
 
 						?>
-							<button class="cn-button" id="cn-button">Menú</button>
+							<div class="cn-button" id="cn-button">
+								<img src="src/host.png" style="width: 100px; margin: 3px 4px;" alt="Syslog" />
+							</div>
+							<!-- <button class="cn-button" id="cn-button">Menú</button> -->
 							<div class="cn-wrapper" id="cn-wrapper">
-								<ul>
+								<ul style="margin-left: 120px;">
 									<li class="md-trigger" data-modal="modal-1"><a><span>Memoria</span></a></li>
 									<li class="md-trigger md-setperspective" data-modal="modal-19"><a><span>Discos</span></a></li>
 									<li class="md-trigger" data-modal="modal-2"><a><span>Interfaces</span></a></li>
@@ -70,12 +73,46 @@
 									?>	
 								 </ul>
 							</div>
+
+							<div class="cn2-button" id="cn2-button">
+								<img src="src/log.png" class="img_syslog" alt="Syslog" />
+							</div>
+							<!-- <button class="cn2-button" id="cn2-button">SysLog</button> -->
+							<div class="cn2-wrapper" id="cn2-wrapper">
+								<ul style="margin-right: 120px;">
+									<li class="md-trigger" data-modal="modal-1"><a style="color: #fc7d00;"><span>Alerta</span></a></li>
+									<li class="md-trigger md-setperspective" data-modal="modal-19"><a style="color: #fc9700;"><span>Crítico</span></a></li>
+									<li class="md-trigger" data-modal="modal-2"><a style="color: #fccd00;"><span>Error</span></a></li>
+									<li class="md-trigger" data-modal="modal-3"><a style="color: #dbfc00;"><span>Advert...</span></a></li>
+									<li class="md-trigger" data-modal="modal-4"><a style="color: #00fc38;"><span>Noticia</span></a></li>
+									<li class="md-trigger" data-modal="modal-5"><a style="color: #00fcd0;"><span>Info...</span></a></li>
+										
+									<?php
+										if (@$service == "dhcp"){
+											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dhcp" /> -->
+												<li class="md-trigger" data-modal="modal-6"><a a style="color: #00dbff;"><span>Debug</span></a></li>
+											<?php
+										} else if (@$service == "dns"){
+											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dns" /> -->
+												<li class="md-trigger" data-modal="modal-7"><a><span>Zonas</span></a></li>
+											<?php
+										} else if (@$service == "web"){
+											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="web" /> -->
+												<li class="md-trigger" data-modal="modal-8"><a><span>Sitios</span></a></li>
+											<?php
+										}
+									?>	
+								 </ul>
+							</div>
 						<?php
 					}
 				?>
 			</div>
 			<header>
-				<h1>Monitorización de Servidores <span>Recolectar información de red para cada equipo conectado</span></h1>	
+				<h1>Monitorización de Servidores <span>Recolectar información de red para cada equipo conectado | SysLog en acción</span></h1>	
 				<nav class="codrops-demos">
 					<?php
 						if (@$service == "dhcp"){

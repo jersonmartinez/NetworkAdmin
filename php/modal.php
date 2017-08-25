@@ -12,7 +12,7 @@
 
 <div class="md-modal md-effect-1" id="modal-1">
 	<div class="md-content">
-		<h3>Memoria</h3>
+		<h3 ondblclick="javascript: CloseModal();">Memoria</h3>
 		<?php 
 			$ArrayContent = explode(",", $Content); 
 			$ArrayInterfaces = explode("=", $Content); 
@@ -21,7 +21,7 @@
 
 		<div>
 			<p>Estado actual de la memoria</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 33%;"><b>Memoria total</b></td>
 					<td style="width: 33%;"><b>Memoria utilizada</b></td>
@@ -48,20 +48,20 @@
 					<td><?php echo $ArrayContent[5]."MB"; ?></td>
 				</tr>
 			</table>
-			<button class="md-close">Cerrar</button>
+			<button id="ClickMemoria" class="md-close">Cerrar</button>
 		</div>
 	</div>
 </div>
 
 <div class="md-modal md-effect-2" id="modal-2">
 	<div class="md-content">
-		<h3>Interfaces de Red | IP</h3>
+		<h3 ondblclick="javascript: CloseModal();">Interfaces de Red | IP</h3>
 		<div>
 			<?php
 				$ArrayIntIP = explode(",", $ArrayInterfaces[1]);
 			?>
 			<p>Interfaces de red y direcciones IP colocadas en ella</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 30%;"><b>Nombre de la interfaz</b></td>
 					<td style="width: 25%;"><b>Dirección IP</b></td>
@@ -88,13 +88,13 @@
 </div>
 <div class="md-modal md-effect-3" id="modal-3" style="top: 50%;">
 	<div class="md-content">
-		<h3>Puertos</h3>
+		<h3 ondblclick="javascript: CloseModal();">Puertos</h3>
 		<div>
 			<?php
 				$ArrayPuerto = explode(",", $ArrayInterfaces[2]);
 			?>
 			<p>Puertos que se encuentran abiertos</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 50%;"><b>Número de puerto</b></td>
 					<td style="width: 50%;"><b>Protocolo</b></td>
@@ -123,13 +123,13 @@
 </div>
 <div class="md-modal md-effect-4" id="modal-4" style="top: 50%; width: 80%; max-width: 90%;">
 	<div class="md-content">
-		<h3>Estado</h3>
+		<h3 ondblclick="javascript: CloseModal();">Estado</h3>
 		<div>
 			<?php
 				$ArrayEstado = explode("|", $ArrayInterfaces[3]);
 			?>
 			<p>Estados de las conexiones de red</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr style="width: 100%;">
 					<td><b>Protocolo</b></td>
 					<td><b>Direccion Local</b></td>
@@ -172,14 +172,14 @@
 </div>
 <div class="md-modal md-effect-5" id="modal-5">
 	<div class="md-content">
-		<h3>Usuarios</h3>
+		<h3 ondblclick="javascript: CloseModal();">Usuarios</h3>
 		<?php 
 			$ArrayUsuario = explode(",", $ArrayInterfaces[4]);
 		?>
 
 		<div>
 			<p>Usuarios del sistema indicando cuales están logueados actualmente</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 50%;"><b>Cantidad de usuarios</b></td>
 					<td style="width: 50%;"><b>Nombre de usuario</b></td>
@@ -204,14 +204,14 @@
 </div>
 <div class="md-modal md-effect-6" id="modal-6">
 	<div class="md-content">
-		<h3>Monitor DHCP</h3>
+		<h3 ondblclick="javascript: CloseModal();">Monitor DHCP</h3>
 		<div>
 			<?php
 				// echo $ArrayInterfaces[6];
 				$ArrayDHCP = explode("|", $ArrayInterfaces[5]);
 			?>
 			<p>Interfaz en la que está asignando IP's y las asignaciones realizadas.</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr style="width: 100%;">
 					<td><b>Mes</b></td>
 					<td><b>Dia</b></td>
@@ -255,7 +255,7 @@
 </div>
 <div class="md-modal md-effect-7" id="modal-7" style="top: 10%; width: 70%; max-width: 70%;">
 	<div class="md-content">
-		<h3>Configuración de Zonas</h3>
+		<h3 ondblclick="javascript: CloseModal();">Configuración de Zonas</h3>
 		<?php
 			// echo $ArrayInterfaces[5];
 			$Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
@@ -263,7 +263,7 @@
 
 		<div>
 			<p>Archivos de zonas configuradas y las traducciones que estos contienen.</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 25%;"><b>Fichero de zona</b></td>
 					<td style="width: 25%;"><b>Dominio</b></td>
@@ -298,37 +298,52 @@
 </div>
 <div class="md-modal md-effect-8" id="modal-8">
 	<div class="md-content">
-		<h3>Sitios Virtuales</h3>
+		<h3 ondblclick="javascript: CloseModal();">Sitios Virtuales</h3>
 		<?php
 			// echo $ArrayInterfaces[5];
-			$Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
+			$ValVirtualHost = explode(PHP_EOL, $ArrayInterfaces[5]);
 		?>
 
 		<div>
-			<p>Hosts virtuales configurados en el servidor Web.</p>
-			<table style="width: 100%;">
+			<p>Sitios virtuales configurados</p>
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
-					<td style="width: 25%;"><b>Fichero de zona</b></td>
-					<td style="width: 25%;"><b>Dominio</b></td>
-					<td style="width: 25%;"><b>Traducción</b></td>
-					<td style="width: 25%;"><b>Dirección IP</b></td>
+					<td style="width: 33%;"><b>VirtualHost</b></td>
+					<td style="width: 33%;"><b>Nombre de dominio</b></td>
+					<td style="width: 33%;"><b>Estado</b></td>
 				</tr>
 
 				<?php
-					for ($i=0; $i < count($Valores); $i++) { 
+					for ($i=0; $i < count($ValVirtualHost); $i++) { 
 	
-						$new_value = explode(",", $Valores[$i]);					
-						?>
-							<tr>
-						<?php
-						for ($j=0; $j < count($new_value) ; $j++) { 
+						$value_VH = explode(",", $ValVirtualHost[$i]);
+
+						if ($value_VH[0] == "default-ssl.conf"){
 							?>
-								<td><?php echo $new_value[$j]; ?></td>
+								<tr>
+							<?php
+							for ($j=0; $j < count($value_VH) ; $j++) { 
+								?>
+									<td style="color: #2d2d2d;"><?php echo $value_VH[$j]; ?></td>
+								<?php
+							}
+							?>
+								</tr>
+							<?php
+						} else {
+							?>
+								<tr>
+							<?php
+							for ($j=0; $j < count($value_VH) ; $j++) { 
+								?>
+									<td><?php echo $value_VH[$j]; ?></td>
+								<?php
+							}
+							?>
+								</tr>
 							<?php
 						}
-						?>
-							</tr>
-						<?php
+
 					}
 				?>
 
@@ -342,10 +357,10 @@
 
 <div class="md-modal md-effect-19" id="modal-19">
 	<div class="md-content">
-		<h3>Discos Duros</h3>
+		<h3 ondblclick="javascript: CloseModal();">Discos Duros</h3>
 		<div>
 			<p>Uso de Discos Duros</p>
-			<table style="width: 100%;">
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr>
 					<td style="width: 30%;"><b>Tamaño del disco</b></td>
 					<td style="width: 25%;"><b>Disco usado</b></td>
