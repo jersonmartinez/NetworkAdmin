@@ -379,3 +379,9 @@
 		</div>
 	</div>
 </div>
+
+<div class="md-modal2 md-effect-10" id="modal-10">
+	<div class="md-content WriteNewModal">
+	</div>
+	<button id="ClickNewModal" class="md-close">Cerrar</button>
+</div>

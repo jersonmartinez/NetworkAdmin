@@ -15,7 +15,6 @@
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<script src="js/script.js"></script>
 
-
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
 		<script src="js/modernizr.custom.js"></script>
 		
@@ -44,6 +43,7 @@
 								<img src="src/host.png" style="width: 100px; margin: 3px 4px;" alt="Syslog" />
 							</div>
 							<!-- <button class="cn-button" id="cn-button">Menú</button> -->
+							<input type="hidden" id="ClickModalTen" class="md-trigger" data-modal="modal-10" value="Nombre" />
 							<div class="cn-wrapper" id="cn-wrapper">
 								<ul style="margin-left: 120px;">
 									<li class="md-trigger" data-modal="modal-1"><a><span>Memoria</span></a></li>
@@ -52,7 +52,7 @@
 									<li class="md-trigger" data-modal="modal-3"><a><span>Puertos</span></a></li>
 									<li class="md-trigger" data-modal="modal-4"><a><span>Estado</span></a></li>
 									<li class="md-trigger" data-modal="modal-5"><a><span>Usuarios</span></a></li>
-										
+									
 									<?php
 										if (@$service == "dhcp"){
 											?>
@@ -80,31 +80,13 @@
 							<!-- <button class="cn2-button" id="cn2-button">SysLog</button> -->
 							<div class="cn2-wrapper" id="cn2-wrapper">
 								<ul style="margin-right: 120px;">
-									<li class="md-trigger" data-modal="modal-1"><a style="color: #fc7d00;"><span>Alerta</span></a></li>
-									<li class="md-trigger md-setperspective" data-modal="modal-19"><a style="color: #fc9700;"><span>Crítico</span></a></li>
-									<li class="md-trigger" data-modal="modal-2"><a style="color: #fccd00;"><span>Error</span></a></li>
-									<li class="md-trigger" data-modal="modal-3"><a style="color: #dbfc00;"><span>Advert...</span></a></li>
-									<li class="md-trigger" data-modal="modal-4"><a style="color: #00fc38;"><span>Noticia</span></a></li>
-									<li class="md-trigger" data-modal="modal-5"><a style="color: #00fcd0;"><span>Info...</span></a></li>
-										
-									<?php
-										if (@$service == "dhcp"){
-											?>
-												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dhcp" /> -->
-												<li class="md-trigger" data-modal="modal-6"><a a style="color: #00dbff;"><span>Debug</span></a></li>
-											<?php
-										} else if (@$service == "dns"){
-											?>
-												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dns" /> -->
-												<li class="md-trigger" data-modal="modal-7"><a><span>Zonas</span></a></li>
-											<?php
-										} else if (@$service == "web"){
-											?>
-												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="web" /> -->
-												<li class="md-trigger" data-modal="modal-8"><a><span>Sitios</span></a></li>
-											<?php
-										}
-									?>	
+									<li class="md-trigger"><a style="color: #fc7d00;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'alert');"><span>Alerta</span></a></li>
+									<li class="md-trigger md-setperspective"><a style="color: #fc9700;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'crit');"><span>Crítico</span></a></li>
+									<li class="md-trigger"><a style="color: #fccd00;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'err');"><span>Error</span></a></li>
+									<li class="md-trigger"><a style="color: #dbfc00;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'warning');"><span>Advert...</span></a></li>
+									<li class="md-trigger"><a style="color: #00fc38;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'notice');"><span>Noticia</span></a></li>
+									<li class="md-trigger"><a style="color: #00fcd0;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'info');"><span>Info...</span></a></li>
+									<li class="md-trigger"><a style="color: #00dbff;" onclick="javascript: LoadInfo('<?php echo $service; ?>', 'debug');"><span>Debug</span></a></li>
 								 </ul>
 							</div>
 						<?php
@@ -145,6 +127,11 @@
 							<?php
 						}
 					?>
+
+					<form id="FormLoadData">
+						<input type="hidden" name="service_name" id="service_name" />
+						<input type="hidden" name="severity_level" id="severity_level" />
+					</form>
 
 					<form action="./" id="FormService" method="post">
 						<input type="hidden" name="service" id="service" />
