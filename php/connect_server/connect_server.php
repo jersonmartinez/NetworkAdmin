@@ -1,6 +1,6 @@
 <?php
 	function Conexion(){
-		return new mysqli("localhost", "root", "", "Syslog");
+		return new mysqli("127.0.0.1", "rsyslog", "root", "Syslog");
 	}
 
 	function KnowSeverityCode($Severity){

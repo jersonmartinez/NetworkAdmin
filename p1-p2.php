@@ -46,7 +46,8 @@
 							<input type="hidden" id="ClickModalTen" class="md-trigger" data-modal="modal-10" value="Nombre" />
 							<div class="cn-wrapper" id="cn-wrapper">
 								<ul style="margin-left: 120px;">
-									<li class="md-trigger" data-modal="modal-1" title="Memoria y Discos"><a><span>Mem. & Disc.</span></a></li>
+									<li class="md-trigger" data-modal="modal-1"><a><span>Memoria</span></a></li>
+									<li class="md-trigger md-setperspective" data-modal="modal-19"><a><span>Discos</span></a></li>
 									<li class="md-trigger" data-modal="modal-2"><a><span>Interfaces</span></a></li>
 									<li class="md-trigger" data-modal="modal-3"><a><span>Puertos</span></a></li>
 									<li class="md-trigger" data-modal="modal-4"><a><span>Estado</span></a></li>
@@ -55,20 +56,21 @@
 									<?php
 										if (@$service == "dhcp"){
 											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dhcp" /> -->
 												<li class="md-trigger" data-modal="modal-6"><a><span>Asignación</span></a></li>
 											<?php
 										} else if (@$service == "dns"){
 											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="dns" /> -->
 												<li class="md-trigger" data-modal="modal-7"><a><span>Zonas</span></a></li>
 											<?php
 										} else if (@$service == "web"){
 											?>
+												<!-- <input type="hidden" name="nombre_servicio" id="nombre_servicio" value="web" /> -->
 												<li class="md-trigger" data-modal="modal-8"><a><span>Sitios</span></a></li>
 											<?php
 										}
 									?>	
-
-									<li class="md-trigger md-setperspective" data-modal="modal-19"><a><span>Syslog</span></a></li>
 								 </ul>
 							</div>
 

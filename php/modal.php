@@ -12,7 +12,7 @@
 
 <div class="md-modal md-effect-1" id="modal-1">
 	<div class="md-content">
-		<h3 ondblclick="javascript: CloseModal();">Memoria</h3>
+		<h3 ondblclick="javascript: CloseModal();">Memoria | Discos Duros</h3>
 		<?php 
 			$ArrayContent = explode(",", $Content); 
 			$ArrayInterfaces = explode("=", $Content); 
@@ -48,6 +48,25 @@
 					<td><?php echo $ArrayContent[5]."MB"; ?></td>
 				</tr>
 			</table>
+
+			<br/>
+			<p>Uso de Discos Duros</p>
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
+				<tr>
+					<td style="width: 30%;"><b>Tamaño del disco</b></td>
+					<td style="width: 25%;"><b>Disco usado</b></td>
+					<td style="width: 20%;"><b>Disponible</b></td>
+					<td style="width: 25%;"><b>% en uso</b></td>
+				</tr>
+
+				<tr>
+					<td><?php echo $ArrayContent[6]; ?></td>
+					<td><?php echo $ArrayContent[7]; ?></td>
+					<td><?php echo $ArrayContent[8]; ?></td>
+					<td><?php echo $ArrayContent[9]; ?></td>
+				</tr>
+			</table>
+
 			<button id="ClickMemoria" class="md-close">Cerrar</button>
 		</div>
 	</div>
