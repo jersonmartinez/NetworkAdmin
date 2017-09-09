@@ -7,6 +7,7 @@
 
 		private $connect;
 		private $stream;
+		private $errors = array();
 
 		private $local_path = "/var/www/html/NetworkAdmin/php/";
 		private $remote_path;
@@ -14,19 +15,18 @@
 
 		function __construct($ip_host, $username, $password){
 			if (!function_exists("ssh2_connect")) 
-        		die("La función ssh2_connect no existe.");
+        		array_push($this->errors, "La función ssh2_connect no existe");
 
         	if(!($this->connect = ssh2_connect($ip_host, 22))){
-		        echo "Falló: No se ha podido conectar al host.\n";
+        		array_push($this->errors, "No hay conexión con al dirección IP: " . $ip_host);
 		    } else {
-		        
 		        if(!ssh2_auth_password($this->connect, $username, $password)) {
-		            echo "Falló: Autenticación invalida\n";
+        			array_push($this->errors, "Autenticación invalida");
 		        } else {
 					$this->ip_host 		= $ip_host;
 					$this->username 	= $username;
 					$this->password 	= $password;
-					$this->remote_path = "/home/".$username."/";
+					$this->remote_path 	= "/home/".$username."/";
 		        }
 		    }
 		}
@@ -60,8 +60,15 @@
 			if (!$scp)
 				die("Error al intentar enviar el script <b>".$filename."</b> al host con IP <b>".$this->ip_host."</b>");
 
-			if (!unlink($this->local_path.$filename))
+			if (deleteFile($filename))
 				die("El script <b>".$filename."</b> no se ha podido eliminar del sistema local.");
+
+			return true;
+		}
+
+		public function deleteFile($filename){
+			if (!unlink($this->local_path.$filename))
+				return false;
 
 			return true;
 		}
@@ -77,7 +84,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getDiskUsage(){
@@ -102,7 +109,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getNetworkInterfaces(){
@@ -127,7 +134,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getOpenPorts(){
@@ -147,7 +154,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getNetworkConnections(){
@@ -171,7 +178,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getUsersConnected(){
@@ -189,7 +196,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getDHCPShowAssignIP(){
@@ -215,7 +222,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getDNSFileZones(){
@@ -237,7 +244,7 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
 		}
 
 		public function getHTTPVirtualHost(){
@@ -261,9 +268,92 @@
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
 
-			return false;
+			return getErrors();
+		}
+
+		// public function getNmapTrackingIP(){
+		// 	$filename = "getNmapTrackingIP.sh";
+
+		// 	$ActionArray[] = "network=$(ip route show | sed '/default /d' | awk {'print $1'});";
+		// 	array_push($ActionArray, 'for i in ${network[*]}; do');
+		// 	array_push($ActionArray, '	nmap -sP $i | grep "scan " | awk {"print $NF"}');
+		// 	array_push($ActionArray, 'done');
+			
+		// 	if (!$this->writeFile($ActionArray, $filename))
+		// 		return false;
+			
+		// 	$content = shell_exec($this->local_path.$filename);
+			
+		// 	if (!deleteFile($filename))
+		// 		die("El script <b>".$filename."</b> no se ha podido eliminar del sistema local.");
+
+		// 	return $content;
+		// }
+
+		public function getNetworkIPLocal(){
+			return shell_exec('ip route show | awk {"print $NF"}');
+		}
+
+		public function getNmapTrackingIP(){
+
+			$hosts = shell_exec("hostname -I");
+
+			echo $hosts;
+
+			$val = shell_exec("nmap -sP 192.168.100.0/24");
+
+			$ArrayContent = explode("Host is up", $val); 
+			$ArrayData = array();
+			for ($i=0; $i < count($ArrayContent); $i++) { 
+				$ArrayContentTwo = explode("Nmap scan report for ", $ArrayContent[$i]); 
+
+				for ($j=0; $j < count($ArrayContentTwo); $j++) { 
+					if (filter_var(trim($ArrayContentTwo[$j]), FILTER_VALIDATE_IP)) {
+					    echo $ArrayContentTwo[$j]."<br/>";
+					}
+				}
+			}
+		}
+
+		public function getErrors(){
+			return implode("<br/>", $this->errors);
 		}
 	}
 
-	echo (new ConnectSSH("192.168.100.4", "network", "123"))->getHTTPVirtualHost();
+	// $CN = new ConnectSSH();
+	// $CN->getNmapTrackingIP();
+	
+//  $ip_address = "192.168.100.2";
+// $ip_nmask = "255.255.255.0";
+// ipv4Breakout();
+
+// function ipv4Breakout () {
+//     global $ip_address;
+//     global $ip_nmask;
+//     //convert ip addresses to long form
+//     $ip_address_long = ip2long($ip_address);
+//     $ip_nmask_long = ip2long($ip_nmask);
+//     //caculate network address
+//     $ip_net = $ip_address_long & $ip_nmask_long;
+//     //caculate first usable address
+//     $ip_host_first = ((~$ip_nmask_long) & $ip_address_long);
+//     $ip_first = ($ip_address_long ^ $ip_host_first) + 1;
+//     //caculate last usable address
+//     $ip_broadcast_invert = ~$ip_nmask_long;
+//     $ip_last = ($ip_address_long | $ip_broadcast_invert) - 1;
+//     //caculate broadcast address
+//     $ip_broadcast = $ip_address_long | $ip_broadcast_invert;
+
+//     //Output
+//     $ip_net_short = long2ip($ip_net);
+//     $ip_first_short = long2ip($ip_first);
+//     $ip_last_short = long2ip($ip_last);
+//     $ip_broadcast_short = long2ip($ip_broadcast);
+//     echo "Network - " . $ip_net_short . "<br>";
+//     echo "First usable - " . $ip_first_short . "<br>";
+//     echo "Last usable - " . $ip_last_short . "<br>";
+//     echo "Broadcast - " . $ip_broadcast_short . "<br>";
+// }
+
+	echo (new ConnectSSH("192.168.100.2", "network", "123"))->getNmapTrackingIP();
 ?>
