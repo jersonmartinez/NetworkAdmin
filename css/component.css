@@ -42,10 +42,44 @@ perspective effects (not including the modals and the overlay).
 	transform: translateX(-50%) translateY(-50%);
 }
 
-#ClickNewModal{
+#ClickNewModal, #ClickTrackingNetwork {
 	position: absolute;
 	bottom: 10px;
+	padding: 7px 15px;
 	left: 48%;
+	border: 0;
+	background-color: rgba(0,0,0,.2);
+	color: #fff;
+}
+
+#ClickMemoriaDiscos, #ClickEstado, #ClickInterfaces, #ClickPuertos, #ClickUsuarios {
+	position: absolute;
+	bottom: 5px;
+	padding: 7px 15px;
+	left: 45%;
+	border: 0;
+	background-color: rgba(0,0,0,.2);
+	color: #fff;
+}
+
+#ClickAddHost {
+	position: absolute;
+	bottom: 10px;
+	padding: 7px 15px;
+	left: 40%;
+	border: 0;
+	background-color: rgba(0,0,0,.2);
+	color: #fff;
+}
+
+#chg_ip_address, #chg_username, #chg_password  {
+	border: none;
+	color: #fff;
+	width: 100%;
+	padding: 6px 0;
+	background-color: rgba(0,0,0,.6);
+	border-bottom: 2px solid #fff;
+	margin-top: 10px;
 }
 
 .md-modal2 {

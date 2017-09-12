@@ -1,4 +1,24 @@
 <?php
+	include ("ssh.class.php");
+
+	if ($service == "dhcp"){
+		$CN = new ConnectSSH("192.168.100.2", "network", "123");
+	} else if ($service == "dns"){
+		$CN = new ConnectSSH("192.168.100.3", "network", "123");		
+	} else if ($service == "web"){
+		$CN = new ConnectSSH("192.168.100.4", "network", "123");
+	} else if ($service == "more"){
+		$CN = new ConnectSSH();
+	}
+
+	if (isset($service) && !$CN->connect){
+		?>
+			<script>
+				alert("No se ha podido establecer la conexión con el equipo (<?php echo $CN->ip_host; ?>)");
+			</script>
+		<?php
+	}
+
 	function Fatality($ArrayEstado){
 		$contadorSecond = 0;
 		for ($i=0; $i < count($ArrayEstado); $i++) { 
@@ -14,8 +34,9 @@
 	<div class="md-content">
 		<h3 ondblclick="javascript: CloseModal();">Memoria | Discos Duros</h3>
 		<?php 
-			$ArrayContent = explode(",", $Content); 
-			$ArrayInterfaces = explode("=", $Content); 
+			$ArrayContent 		= explode(",", $CN->getMemoryState()); 
+			$ArrayContentTwo 	= explode(",", $CN->getDiskUsage()); 
+			// $ArrayInterfaces = explode("=", $CN->getNetworkInterfaces()); 
 			// echo $ArrayContent[0];
 		?>
 
@@ -60,10 +81,10 @@
 				</tr>
 
 				<tr>
-					<td><?php echo $ArrayContent[6]; ?></td>
-					<td><?php echo $ArrayContent[7]; ?></td>
-					<td><?php echo $ArrayContent[8]; ?></td>
-					<td><?php echo $ArrayContent[9]; ?></td>
+					<td><?php echo $ArrayContentTwo[0]; ?></td>
+					<td><?php echo $ArrayContentTwo[1]; ?></td>
+					<td><?php echo $ArrayContentTwo[2]; ?></td>
+					<td><?php echo $ArrayContentTwo[3]; ?></td>
 				</tr>
 			</table>
 
@@ -77,7 +98,7 @@
 		<h3 ondblclick="javascript: CloseModal();">Interfaces de Red | IP</h3>
 		<div>
 			<?php
-				$ArrayIntIP = explode(",", $ArrayInterfaces[1]);
+				$ArrayIntIP = explode(",", explode("=", $CN->getNetworkInterfaces())[1]);
 			?>
 			<p>Interfaces de red y direcciones IP colocadas en ella</p>
 			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
@@ -110,7 +131,7 @@
 		<h3 ondblclick="javascript: CloseModal();">Puertos</h3>
 		<div>
 			<?php
-				$ArrayPuerto = explode(",", $ArrayInterfaces[2]);
+				$ArrayPuerto = explode(",", explode("=", $CN->getOpenPorts())[1]);
 			?>
 			<p>Puertos que se encuentran abiertos</p>
 			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
@@ -145,14 +166,15 @@
 		<h3 ondblclick="javascript: CloseModal();">Estado</h3>
 		<div>
 			<?php
-				$ArrayEstado = explode("|", $ArrayInterfaces[3]);
+				$ArrayEstado = explode("|", explode("=", $CN->getNetworkConnections())[0]);
+
 			?>
 			<p>Estados de las conexiones de red</p>
 			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
 				<tr style="width: 100%;">
 					<td><b>Protocolo</b></td>
-					<td><b>Direccion Local</b></td>
-					<td><b>Direccion Remota</b></td>
+					<td><b>Dirección Local</b></td>
+					<td><b>Dirección Remota</b></td>
 					<td><b>Estado</b></td>
 					<td><b>Temporizador</b></td>
 				</tr>
@@ -193,7 +215,7 @@
 	<div class="md-content">
 		<h3 ondblclick="javascript: CloseModal();">Usuarios</h3>
 		<?php 
-			$ArrayUsuario = explode(",", $ArrayInterfaces[4]);
+			$ArrayUsuario = explode(",", explode("=", $CN->getUsersConnected())[0]);
 		?>
 
 		<div>
@@ -227,7 +249,7 @@
 		<div>
 			<?php
 				// echo $ArrayInterfaces[6];
-				$ArrayDHCP = explode("|", $ArrayInterfaces[5]);
+				$ArrayDHCP = explode("|", explode("=", $CN->getDHCPShowAssignIP())[1]);
 			?>
 			<p>Interfaz en la que está asignando IP's y las asignaciones realizadas.</p>
 			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
@@ -277,7 +299,8 @@
 		<h3 ondblclick="javascript: CloseModal();">Configuración de Zonas</h3>
 		<?php
 			// echo $ArrayInterfaces[5];
-			$Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
+			// $Valores = explode(PHP_EOL, $ArrayInterfaces[5]);
+			$Valores = explode("\n", explode("=", $CN->getDNSFileZones())[0]);
 		?>
 
 		<div>
@@ -320,7 +343,7 @@
 		<h3 ondblclick="javascript: CloseModal();">Sitios Virtuales</h3>
 		<?php
 			// echo $ArrayInterfaces[5];
-			$ValVirtualHost = explode(PHP_EOL, $ArrayInterfaces[5]);
+			$ValVirtualHost = explode("\n", explode("=", $CN->getHTTPVirtualHost())[0]);
 		?>
 
 		<div>
@@ -397,6 +420,79 @@
 			<button class="md-close">Cerrar!</button>
 		</div>
 	</div>
+</div>
+
+<div class="md-modal md-effect-9" id="modal-9">
+	<div class="md-content">
+		<h3 class="DobleClickGarantizado" ondblclick="javascript: CloseModal();">Nuevo Host</h3>
+		<div>
+			<p>Se agrega un nuevo host para monitorizarlo mediante este panel de control.</p>
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
+				
+				<tr>
+					<td style="width: 33%;"><b>Dirección IP</b></td>
+					<td style="width: 33%;"><b>Nombre de usuario</b></td>
+					<td style="width: 33%;"><b>Contraseña</b></td>
+				</tr>
+				<tr>
+					<td style="width: 32%;"><input type="text" id="chg_ip_address" placeholder="IP Address" /></td>
+					<td style="width: 32%;"><input type="text" id="chg_username" placeholder="Username" /></td>
+					<td style="width: 32%;"><input type="password" id="chg_password" placeholder="Password" /></td>
+				</tr>
+			</table>
+			<br><br>
+			<input type="hidden" class="md-close" id="ClickCloseNow"/>
+			<button id="ClickAddHost" onclick="javascript: SendDataNewHost();">¡Listo, Conectar!</button>
+		</div>
+	</div>
+</div>
+
+<form id="FormAddNewHost">
+	<input type="hidden" id="add_ip_address" name="add_ip_address" />
+	<input type="hidden" id="add_username" name="add_username" />
+	<input type="hidden" id="add_password" name="add_password" />
+</form>
+
+<div class="md-modal md-effect-11" id="modal-11">
+	<div class="md-content WriteTrackingNetwork">
+		
+	</div>
+	<button id="ClickTrackingNetwork" class="md-close">Cerrar</button>
+</div>
+
+<div class="md-modal md-effect-13" id="modal-13">
+	<div class="md-content WriteMemoriaDiscos">
+		
+	</div>
+	<button id="ClickMemoriaDiscos" class="md-close">Cerrar</button>
+</div>
+
+<div class="md-modal md-effect-14" id="modal-14">
+	<div class="md-content WriteInterfaces">
+		
+	</div>
+	<button id="ClickInterfaces" class="md-close">Cerrar</button>
+</div>
+
+<div class="md-modal md-effect-15" id="modal-15">
+	<div class="md-content WritePuertos">
+		
+	</div>
+	<button id="ClickPuertos" class="md-close">Cerrar</button>
+</div>
+
+<div class="md-modal md-effect-16" id="modal-16">
+	<div class="md-content WriteEstado">
+		
+	</div>
+	<button id="ClickEstado" class="md-close">Cerrar</button>
+</div>
+
+<div class="md-modal md-effect-17" id="modal-17">
+	<div class="md-content WriteUsuarios">
+		
+	</div>
+	<button id="ClickUsuarios" class="md-close">Cerrar</button>
 </div>
 
 <div class="md-modal2 md-effect-10" id="modal-10">
