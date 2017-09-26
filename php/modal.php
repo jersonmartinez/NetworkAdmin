@@ -447,6 +447,36 @@
 	</div>
 </div>
 
+<div class="md-modal md-effect-18" id="modal-18">
+	<div class="md-content">
+		<h3 ondblclick="javascript: CloseModal();">Copias de Seguridad | Backup</h3>
+		<div>
+			<p>Realizar copias de seguridad de los servicios instalados en los hosts remotos.</p>
+			<table ondblclick="javascript: CloseModal();" style="width: 100%;">
+				<form id="FormCheckServices">
+					<input type="hidden" id="text_CS_IPAddress" name="text_CS_IPAddress" />
+					<input type="hidden" id="text_CS_Username" name="text_CS_Username" />
+					<tr>
+						<td style="width: 30%;"><label><input type="checkbox" onchange="javascript: ChangeValueCheckBox(this);" name="check_apache" id="check_apache" value="no"> APACHE</label></td>
+						<td style="width: 30%;"><label><input type="checkbox" onchange="javascript: ChangeValueCheckBox(this);" name="check_mysql" id="check_mysql" value="no"> MYSQL</label></td>
+						<td style="width: 30%;"><label><input type="checkbox" onchange="javascript: CheckDirData(this);" id="check_data" value="no"> DATOS</label></td>
+					</tr>
+
+					<tr>
+						<td style="width: 30%;"><label><input type="checkbox" onchange="javascript: ChangeValueCheckBox(this);" name="check_dns" id="check_dns" value="no"> DNS</label></td>
+						<td style="width: 30%;"><label><input type="checkbox" onchange="javascript: ChangeValueCheckBox(this);" name="check_dhcp" id="check_dhcp" value="no"> DHCP</label></td>
+						<td style="width: 30%;"><input type="text" name="path_dirdata" id="path_dirdata" placeholder="/Ruta /del /directorio" disabled /></td>
+					</tr>
+				</form>
+
+			</table>
+			<br>
+			<button class="md-close" style="float: left;" id="ClickCloseNowExecServices">Cerrar!</button>
+			<button id="BtnExecServices" style="float: right;" onclick="javascript: ExecServices();">¡Realizar Backup!</button>
+		</div>
+	</div>
+</div>
+
 <form id="FormAddNewHost">
 	<input type="hidden" id="add_ip_address" name="add_ip_address" />
 	<input type="hidden" id="add_username" name="add_username" />

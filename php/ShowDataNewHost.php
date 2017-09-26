@@ -44,6 +44,7 @@
 						<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Puertos');">PUERTOS</a>
 						<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Estado');">ESTADO</a>
 						<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Usuarios');">USUARIOS</a>
+						<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeBackup('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>');"><i class="fa fa-codepen" aria-hidden="true"></i> BACKUP</a>
 						<!-- <a class="class_more" style="cursor: pointer;" onclick="javascript: MakeClick();">MEMORIA Y DISCOS</a> -->
 					</nav>
 			    </div>

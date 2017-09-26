@@ -120,3 +120,44 @@ function MakeQuery(ip_address, username, action){
 	    }
 	});
 }
+
+function ChangeValueCheckBox(value){
+	if (value.checked){
+		$(value).val("yes");
+	} else {
+		$(value).val("no");
+	}
+}
+
+function ExecServices(){
+	$("#BtnExecServices").html("Aplicando copia de seguridad...");
+
+	$.ajax({
+	    url: "php/CreateBackup.php",
+	    type: "POST",
+	    data: $("#FormCheckServices").serialize(),
+	    success: function(data){
+			$("#BtnExecServices").html("¡Realizar Backup!");
+    		setTimeout(function(){
+	    		$("#ClickCloseNowExecServices").click();
+	    	}, 1000);
+	    }
+	});
+}
+
+function CheckDirData(value){
+	if (value.checked){
+		$(value).val("yes");
+		document.getElementById('path_dirdata').disabled = false;
+	} else {
+		document.getElementById('path_dirdata').disabled = true;
+		$(value).val("no");
+	}
+}
+
+function MakeBackup(ip_address, username){
+	$("#text_CS_IPAddress").val(ip_address);
+	$("#text_CS_Username").val(username);
+
+	$("#MakeClickBackup").click();
+}

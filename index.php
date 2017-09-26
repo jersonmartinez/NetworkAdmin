@@ -53,6 +53,7 @@
 								<input type="hidden" id="MakeClickPuertos" class="md-trigger" data-modal="modal-15" />
 								<input type="hidden" id="MakeClickEstado" class="md-trigger" data-modal="modal-16" />
 								<input type="hidden" id="MakeClickUsuarios" class="md-trigger" data-modal="modal-17" />
+								<input type="hidden" id="MakeClickBackup" class="md-trigger" data-modal="modal-18" />
 								
 								<div class="cn-wrapper" id="cn-wrapper">
 									<!-- <input type="button" class="md-trigger" ?data-modal="modal-1" value="Agregar máquina" style="position: absolute; z-index: 100000; right: 10px; top: 20px;" /> -->
@@ -225,6 +226,7 @@
 											<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Puertos');"><i class="fa fa-anchor" aria-hidden="true"></i> PUERTOS</a>
 											<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Estado');"><i class="fa fa-history" aria-hidden="true"></i> ESTADO</a>
 											<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeQuery('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Usuarios');"><i class="fa fa-user" aria-hidden="true"></i> USUARIOS</a>
+											<a class="class_more" style="cursor: pointer;" onclick="javascript: MakeBackup('<?php echo $Row['ip_address']; ?>','<?php echo $Row['username']; ?>','Usuarios','Backup');"><i class="fa fa-codepen" aria-hidden="true"></i> BACKUP</a>
 											<!-- <a class="class_more" style="cursor: pointer;" onclick="javascript: MakeClick();">MEMORIA Y DISCOS</a> -->
 										</nav>
 								    </div>
