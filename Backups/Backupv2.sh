@@ -161,7 +161,7 @@ dirDNS=("/etc/bind/"
 ##################################################################
 # Función para realizar la copia del servicio dhcp
 function backupDHCP() {
-    if [[ `VerifyService bind9` == "Well" ]]; then
+    if [[ `VerifyService dhcpd` == "Well" ]]; then
         if [[ ! -d /Backups ]]; then
             mkdir /Backups
         fi
@@ -201,7 +201,7 @@ function comprimirDHCP() {
 
 ##################################################################
 function backupDNS() {
-    if [[ `VerifyService bind9` == "Well" ]]; then
+    if [[ `VerifyService bind` == "Well" ]]; then
         if [[ ! -d /Backups ]]; then
             mkdir /Backups
         fi
@@ -276,6 +276,7 @@ function ShowErrors(){
 
 ##################################################################
 #Se llaman las funciones
+CONTADOR=0
 if [ $# == 0 ]; then
 	echo "Por favor, pase los parámetros necesarios. [IP][-Services ...]"
 else
@@ -284,18 +285,13 @@ else
 	ListArguments=(${LA// / })
 fi
 
-while [  $CONTADOR -lt $# ]; do
-	for Dir in $*; do
-		if [[ $(echo $Dir | egrep "^[-data:]*") ]]; then
-			data=$Dir
-		fi
-	done
-	if [ $# == 0 ]; then
+while [  $CONTADOR -lt $# ]; do	
+	if [ $# == 1 ]; then
 		BackupApache
 		BackupMySQL
 		backupDHCP
 		backupDNS
-	elif [ $# -gt 0 ]; then
+	elif [ $# -gt 1 ]; then
 		case ${ListArguments[$CONTADOR]} in
 			"-apache")
 				BackupApache
@@ -309,9 +305,6 @@ while [  $CONTADOR -lt $# ]; do
 			"-dns")
 				backupDNS
 			;;
-			$data)
-				echo "Pendiente llamar funcion BackupData"
-			;;
 			*)
 				echo "El parámetro: "${ListArguments[$CONTADOR]} "es desconocido"
 			;;
@@ -319,10 +312,6 @@ while [  $CONTADOR -lt $# ]; do
 	fi
 	let CONTADOR=CONTADOR+1
 done
-if [[ $CONTADOR != 0 ]]; then
-	CompressFiles
-fi
-
-if [[ $CONTADOR != 0 ]]; then
+if [[ $CONTADOR -gt 0 ]]; then
 	CompressFiles
 fi

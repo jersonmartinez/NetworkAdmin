@@ -33,7 +33,7 @@
 
 	$Me = new ConnectSSH($ip_address, $username, $password);
 
-	echo "Resultado: ".$Me->ScriptPrueba(implode(" ", $arguments));
+	echo "Resultado: ".$Me->CreateBackup(implode(" ", $arguments));
 	// echo $Me->RunLines("ls");
 
 	// $salida = system('./prueba.sh');

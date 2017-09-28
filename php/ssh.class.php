@@ -64,13 +64,16 @@
 			} else {
 				return true;
 			}
+		}
 
-				// die("Error al intentar enviar el script <b>".$filename."</b> al host con IP <b>".$this->ip_host."</b>");
-			// if (deleteFile($filename)) {
-			// 	return true;
-			// }
-				// die("El script <b>".$filename."</b> no se ha podido eliminar del sistema local.");
-			// return true;
+		public function recvFile($remotePath){
+			$scp = ssh2_scp_recv($this->connect, $remotePath, "/Backups");
+
+			if (!$scp){
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		public function deleteFile($filename){
@@ -80,8 +83,8 @@
 			return true;
 		}
 
-		public function ScriptPrueba($arguments){
-			$filename = "ScriptPrueba.sh";
+		public function CreateBackup($arguments){
+			$filename = "CreateBackup.sh";
 
 			$ActionArray[] = 'CurrentDate=$(date +"%d-%b-%Y")';
 			array_push($ActionArray, 'CurrentDateFormat=$(date +"%d%m%Y")');
@@ -93,8 +96,8 @@
 			array_push($ActionArray, 'DirCompact=$(printf "%s_%s_%s" $HostName $CurrentDateFormat $CurrentDateTime)');
 
 			array_push($ActionArray, 'function CreateDirs(){');
-			array_push($ActionArray, '[ ! -d $DirStorage ] && mkdir -p ${DirStorage}');
-			array_push($ActionArray, 'chmod 0777 -R -f $(dirname $(dirname $DirStorage))');
+			array_push($ActionArray, '	[ ! -d $DirStorage ] && mkdir -p ${DirStorage}');
+			array_push($ActionArray, '	chmod 0777 -R -f $(dirname $(dirname $DirStorage))');
 			array_push($ActionArray, '}');
 
 			array_push($ActionArray, 'function VerifyService(){');
@@ -169,7 +172,7 @@
 			array_push($ActionArray, ')');
 
 			array_push($ActionArray, 'function backupDHCP() {');
-			array_push($ActionArray, '	if [[ `VerifyService bind9` == "Well" ]]; then');
+			array_push($ActionArray, '	if [[ `VerifyService dhcpd` == "Well" ]]; then');
 			array_push($ActionArray, '		if [[ ! -d /Backups ]]; then');
 			array_push($ActionArray, '			mkdir /Backups');
 			array_push($ActionArray, '		fi');
@@ -197,7 +200,7 @@
 			array_push($ActionArray, '}');
 
 			array_push($ActionArray, 'function backupDNS() {');
-			array_push($ActionArray, '	if [[ `VerifyService bind9` == "Well" ]]; then');
+			array_push($ActionArray, '	if [[ `VerifyService bind` == "Well" ]]; then');
 			array_push($ActionArray, '		if [[ ! -d /Backups ]]; then');
 			array_push($ActionArray, '			mkdir /Backups');
 			array_push($ActionArray, '		fi');
@@ -285,13 +288,22 @@
 
 			array_push($ActionArray, 'if [[ $CONTADOR != 0 ]]; then');
 			array_push($ActionArray, '	CompressFiles');
+			array_push($ActionArray, '	scp -C -r /Backups/* network@192.168.100.10:/Backups');
 			array_push($ActionArray, 'fi');	
 			
+			// if ($this->recvFile("/Backups")){
+			// 	echo "Enviado";
+			// } else {
+			// 	echo "No ha sido enviado";
+			// }
+			
+
 			$RL[] = $this->remote_path.$filename." ".$arguments;
 			array_push($RL, "rm -rf ".$this->remote_path.$filename);
 
 			if ($this->writeFile($ActionArray, $filename) && $this->sendFile($filename))
 				return $this->RunLines(implode("\n", $RL));
+				// return "Resultado";
 
 			return getErrors();
 		}
